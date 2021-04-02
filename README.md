@@ -1,14 +1,4 @@
 
-<p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 0; ALERTS: 4.</p>
-<ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
-
-<p style="color: red; font-weight: bold">Links to alert messages:</p><a href="#gdcalert1">alert1</a>
-<a href="#gdcalert2">alert2</a>
-<a href="#gdcalert3">alert3</a>
-<a href="#gdcalert4">alert4</a>
-
-<p style="color: red; font-weight: bold">>>>>> PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>
-
 
 **Project Three: Data Warehouse**
 
@@ -118,6 +108,9 @@ This project builds an ETL pipeline on AWS Cloud for a music streaming service c
 
 
 *   **Query Result Example First Row:** Jean Grae, Chapter One: Destiny, 2709
+
+2. Give me the total number of listens each day of the week ordered in Descending Order.
+
 *   **Query:**
 
 		SELECT t.weekday, count(s.songplay_id) as number_of_listens_each_day
@@ -140,15 +133,7 @@ This project builds an ETL pipeline on AWS Cloud for a music streaming service c
 **Database Info and Tables**
 
 
-
-
-
-
 ![alt_text](images/Staging_Tables.png "image_tooltip")
-
-
-
-
 
 
 
