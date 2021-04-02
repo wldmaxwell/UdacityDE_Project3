@@ -22,7 +22,7 @@ This project builds an ETL pipeline on AWS Cloud for a music streaming service c
 *   S3 
     *   Storage service that holds event and song data JSON files
 
-**How to Run **
+**How to Run**
 
 
 
