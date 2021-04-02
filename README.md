@@ -133,6 +133,12 @@ This project builds an ETL pipeline on AWS Cloud for a music streaming service c
 **Database Info and Tables**
 
 
+*   **Cluster Info:** 
+    *   DWH_CLUSTER_TYPE=multi-node
+    *   DWH_NUM_NODES=4
+    *.  DWH_NODE_TYPE=dc2.large
+
+
 ![alt_text](images/Staging_Tables.png "image_tooltip")
 
 
