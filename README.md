@@ -1,6 +1,6 @@
 
 
-**Project Three: Data Warehouse**
+				**Project Three: Data Warehouse**
 
  
 
@@ -110,7 +110,7 @@ This project builds an ETL pipeline on AWS Cloud for a music streaming service c
 *   **Query Result Example First Row:** Jean Grae, Chapter One: Destiny, 2709
 
 2. Give me the total number of listens each day of the week ordered in Descending Order.
-
+	
 *   **Query:**
 
 		SELECT t.weekday, count(s.songplay_id) as number_of_listens_each_day
