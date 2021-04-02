@@ -1,6 +1,6 @@
 
 
-				**Project Three: Data Warehouse**
+**Project Three: Data Warehouse**
 
  
 
