@@ -120,15 +120,15 @@ This project builds an ETL pipeline on AWS Cloud for a music streaming service c
 *   **Query Result Example First Row:** Jean Grae, Chapter One: Destiny, 2709
 *   **Query:**
 
-	Select t.weekday, count(s.songplay_id) as number_of_listens_each_day
+		Select t.weekday, count(s.songplay_id) as number_of_listens_each_day
 	
-	From time t
+		From time t
 	
-	JOIN songplay s  on (t.start_time = s.start_time)
+		JOIN songplay s  on (t.start_time = s.start_time)
 
-	Group by t.weekday
+		Group by t.weekday
 	
-	Order by number_of_listens_each_day DESC;
+		Order by number_of_listens_each_day DESC;
 
 
 
