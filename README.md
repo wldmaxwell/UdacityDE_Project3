@@ -64,7 +64,7 @@ This project builds an ETL pipeline on AWS Cloud for a music streaming service c
 
 
 
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
 
 
 ![alt_text](images/Song_Data.png "image_tooltip")
@@ -78,7 +78,7 @@ This project builds an ETL pipeline on AWS Cloud for a music streaming service c
 
 
 
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
 
 
 ![alt_text](images/Log_Data.png "image_tooltip")
@@ -105,29 +105,34 @@ This project builds an ETL pipeline on AWS Cloud for a music streaming service c
 
 
 
-*   **Query:** select a.artist_name, s.title, s.duration 
+*   **Query:** 
 
-                       from artist a
+    		     select a.artist_name, s.title, s.duration 
+		     
+		     from artist a
 
-                       JOIN song s on (a.artist_id = s.artist_id)
+                      JOIN song s on (a.artist_id = s.artist_id)
 
-                       ORDER BY s.duration DESC limit 15;
+                      ORDER BY s.duration DESC limit 15;
 
 
 
 *   **Query Result Example First Row:** Jean Grae, Chapter One: Destiny, 2709
-*   **Query: **Select t.weekday, count(s.songplay_id) as number_of_listens_each_day
+*   **Query: **
 
-                       From time t
-
-
-     JOIN songplay s  on (t.start_time = s.start_time)
+    Select t.weekday, count(s.songplay_id) as number_of_listens_each_day
 
 
-     Group by t.weekday
+    From time t
 
 
-     Order by number_of_listens_each_day DESC;
+    JOIN songplay s  on (t.start_time = s.start_time)
+
+
+    Group by t.weekday
+
+
+    Order by number_of_listens_each_day DESC;
 
 
 
@@ -140,7 +145,7 @@ This project builds an ETL pipeline on AWS Cloud for a music streaming service c
 
 
 
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
 
 
 ![alt_text](images/Staging_Tables.png "image_tooltip")
@@ -148,7 +153,7 @@ This project builds an ETL pipeline on AWS Cloud for a music streaming service c
 
 
 
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
 
 
 ![alt_text](images/Analytics_Tables.png "image_tooltip")
