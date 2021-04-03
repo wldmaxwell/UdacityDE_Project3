@@ -50,10 +50,11 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 
 #STAGING TABLES
+# Staging tables shouldn't have Not NUll because its a exact copy
 
 staging_events_table_create= ("""
     CREATE TABLE IF NOT EXISTS staging_events (
-        event_id bigint Identity (0,1) NOT NULL,
+        event_id bigint Identity (0,1) NULL,
         artist varchar                 NULL,
         auth varchar                   NULL,
         first_name varchar             NULL,
@@ -66,10 +67,10 @@ staging_events_table_create= ("""
         method varchar                 NULL,
         page varchar                   NULL,
         registration varchar           NULL,
-        session_id integer             NOT NULL sortkey distkey,
+        session_id integer             NULL sortkey distkey,
         song varchar                   NULL,
         status integer                 NULL,
-        ts bigint                      NOT NULL,
+        ts bigint                      NULL,
         user_agent varchar             NULL,
         user_id integer                NULL
         )
@@ -77,14 +78,14 @@ staging_events_table_create= ("""
 
 staging_songs_table_create = ("""
     CREATE TABLE IF NOT EXISTS staging_songs (
-        artist_id varchar          NOT NULL sortkey distkey,
+        artist_id varchar          NULL sortkey distkey,
         artist_latitude decimal    NULL,
         artist_longitude decimal   NULL,
         artist_location varchar    NULL,
         artist_name varchar        NULL,
         duration decimal           NULL,
         num_songs integer          NULL,
-        song_id varchar            NOT NULL,
+        song_id varchar            NULL,
         title varchar              NULL,
         year integer               NULL
         )
@@ -93,19 +94,7 @@ staging_songs_table_create = ("""
 
 # DIMENSION AND FACT TABLES
 
-songplay_table_create = ("""
-    CREATE TABLE IF NOT EXISTS songplay (
-        songplay_id integer Identity (0, 1)  NOT NULL sortkey,
-        start_time timestamp             NOT NULL,
-        user_id integer                  NOT NULL distkey,
-        level varchar                    NOT NULL,
-        song_id varchar                  NOT NULL,
-        artist_id varchar                NOT NULL,
-        session_id integer               NOT NULL,
-        location varchar                     NULL,
-        user_agent varchar                   NULL
-    )
-""")
+
 
 user_table_create = ("""
     CREATE TABLE IF NOT EXISTS users (
@@ -113,18 +102,9 @@ user_table_create = ("""
         first_name varchar    NULL,
         last_name varchar     NULL,
         gender varchar        NULL,
-        level varchar         NULL
+        level varchar         NULL,
+        PRIMARY KEY (user_id)
     ) 
-""")
-
-song_table_create = ("""
-    CREATE TABLE IF NOT EXISTS song (
-        song_id varchar         NOT NULL sortkey,
-        title varchar           NULL,
-        artist_id varchar       NULL,
-        year integer            NULL,
-        duration decimal        NULL
-    )
 """)
 
 artist_table_create = ("""
@@ -132,10 +112,24 @@ artist_table_create = ("""
         artist_id varchar     NOT NULL sortkey,
         artist_name varchar       NULL,
         location varchar          NULL,
-        latitude decimal         NULL,
-        longitude decimal         NULL
+        latitude decimal          NULL,
+        longitude decimal         NULL,
+        PRIMARY KEY (artist_id)
     )
 """)
+
+song_table_create = ("""
+    CREATE TABLE IF NOT EXISTS song (
+        song_id varchar         NOT NULL sortkey,
+        title varchar           NULL,
+        artist_id varchar       REFERENCES artist(artist_id),
+        year integer            NULL,
+        duration decimal        NULL,
+        PRIMARY KEY (song_id)
+    )
+""")
+
+
 
 time_table_create = ("""
    CREATE TABLE IF NOT EXISTS time (
@@ -145,9 +139,25 @@ time_table_create = ("""
        week integer                 NULL,
        month integer                NULL,
        year integer                 NULL,
-       weekday integer              NULL
+       weekday integer              NULL,
+       PRIMARY KEY (start_time)
    )
    
+""")
+
+songplay_table_create = ("""
+    CREATE TABLE IF NOT EXISTS songplay (
+        songplay_id integer Identity (0, 1)  NOT NULL sortkey,
+        start_time timestamp             REFERENCES time(start_time),
+        user_id integer                  REFERENCES users(user_id) distkey,
+        level varchar                    NOT NULL,
+        song_id varchar                  REFERENCES song(song_id),
+        artist_id varchar                REFERENCES artist(artist_id),
+        session_id integer               NOT NULL,
+        location varchar                     NULL,
+        user_agent varchar                   NULL,
+        PRIMARY KEY (songplay_id)
+    )
 """)
 
 # STAGING TABLES
@@ -277,7 +287,7 @@ FROM staging_events;
 
 # QUERY LISTS
 
-create_table_queries = [staging_events_table_create, staging_songs_table_create, songplay_table_create,  user_table_create, song_table_create, artist_table_create, time_table_create]
+create_table_queries = [staging_events_table_create, staging_songs_table_create, user_table_create, artist_table_create, song_table_create, time_table_create, songplay_table_create]
 drop_table_queries = [staging_events_table_drop, staging_songs_table_drop, songplay_table_drop,  user_table_drop, song_table_drop, artist_table_drop, time_table_drop]
 copy_table_queries = [staging_events_copy, staging_songs_copy]
 insert_table_queries = [songplay_table_insert, user_table_insert, song_table_insert, artist_table_insert, time_table_insert]

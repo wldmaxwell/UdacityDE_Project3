@@ -4,31 +4,34 @@ from sql_queries import create_table_queries, drop_table_queries
 
 
 def drop_tables(cur, conn):
+    """
     
-     """ 
         Drops Existing Tables from AWS Redshift cluster
         Arguments:
             * cur : creates connection to the Database to execute queries
             * conn : connects to database
         Returns:
             * Tables Dropped
+    """
     
-        """
     for query in drop_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def create_tables(cur, conn):
-         """ 
-        Creates tables if they don't exist in AWS Redshift cluster
+    """
+    Creates tables if they don't exist in AWS Redshift cluster
         Arguments:
             * cur : creates connection to the Database to execute queries
             * conn : connects to database
         Returns:
             * Tables Created
+    """
     
-        """
+        
+    
+  
     for query in create_table_queries:
         cur.execute(query)
         conn.commit()
@@ -36,8 +39,8 @@ def create_tables(cur, conn):
 
 def main():
     
-    """ 
-        Connects to AWS, drops existing tables, creates new tables, and closes connection
+    """
+    Connects to AWS, drops existing tables, creates new tables, and closes connection
         Arguments:
             * cur : creates connection to the Database to execute queries
             * host : Redshift cluster address
@@ -50,7 +53,9 @@ def main():
         Returns:
             * Created tables in AWS Redshift cluster
     
-        """
+    """ 
+        
+    
     config = configparser.ConfigParser()
     config.read('dwh.cfg')
 
