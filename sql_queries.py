@@ -148,11 +148,11 @@ time_table_create = ("""
 songplay_table_create = ("""
     CREATE TABLE IF NOT EXISTS songplay (
         songplay_id integer Identity (0, 1)  NOT NULL sortkey,
-        start_time timestamp             REFERENCES time(start_time),
-        user_id integer                  REFERENCES users(user_id) distkey,
+        start_time timestamp             NOT NULL REFERENCES time(start_time),
+        user_id integer                  NOT NULL REFERENCES users(user_id) distkey,
         level varchar                    NOT NULL,
-        song_id varchar                  REFERENCES song(song_id),
-        artist_id varchar                REFERENCES artist(artist_id),
+        song_id varchar                  NOT NULL REFERENCES song(song_id),
+        artist_id varchar                NOT NULL REFERENCES artist(artist_id),
         session_id integer               NOT NULL,
         location varchar                     NULL,
         user_agent varchar                   NULL,
@@ -282,7 +282,8 @@ SELECT
     EXTRACT(month from start_time) as month,
     EXTRACT(year from start_time) as year,
     EXTRACT(weekday from start_time) as weekday
-FROM staging_events;
+FROM staging_events
+WHERE page = 'NextSong';
 """)
 
 # QUERY LISTS
